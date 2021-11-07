@@ -33,7 +33,6 @@ class ExampleController extends ApiController
             $code = $this->response_code('NOT_FOUND');
 
             return $this->errorResponse($message, $code);
-
         }
 
         $this->exampleRepository->delete($example->id);
