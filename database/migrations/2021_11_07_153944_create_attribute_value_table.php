@@ -17,9 +17,9 @@ class CreateAttributeValueTable extends Migration
             $table->id();
             $table->unsignedBigInteger('product_attribute_id');
             $table->unsignedBigInteger('product_id');
-            $table->text('images');
-            $table->foreign('product_attribute_id')->references('id')->on('product_attributes')->onDelete('SET NULL');
-            $table->foreign('product_id')->references('id')->on('product_attributes')->onDelete('SET NULL');
+            $table->text('value');
+            $table->foreign('product_attribute_id')->references('id')->on('product_attributes')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->timestamps();
         });
     }

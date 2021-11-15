@@ -30,9 +30,9 @@ class CreateOrdersTable extends Migration
             $table->string('phone');
             $table->text('address1');
             $table->text('address2')->nullable();
-            $table->boolean('status')->default(true);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('SET NULL');
-            $table->foreign('shipping_id')->references('id')->on('shipping')->onDelete('SET NULL');
+            $table->foreign('shipping_id')->references('id')->on('shippings')->onDelete('SET NULL');
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

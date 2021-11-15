@@ -1,9 +1,14 @@
 <?php
 
 return [
-    'response_message' => [
+    'response_message_success' => [
         'category_not_of_product' => 'The specified category is not a category of this product',
     ],
+
+    'response_message_error' => [
+        'id_not_find'       => 'ID not find',
+    ],
+
     'response_code' => [
         'OK'                    => 200,
         'CREATED'               => 201,

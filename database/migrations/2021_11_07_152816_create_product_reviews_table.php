@@ -18,10 +18,10 @@ class CreateProductReviewsTable extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('product_id')->nullable();
             $table->tinyInteger('rate')->default(0);
-            $table->text('review')->nullable();
-            $table->boolean('status')->default(true);
-            $table->foreian('user_id')->references('id')->on('users')->onDelete('SET NULL');
+            $table->text('review');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('SET NULL');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('SET NULL');
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

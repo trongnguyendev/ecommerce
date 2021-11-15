@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductAttributesTable extends Migration
+class CreateNotificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateProductAttributesTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_attributes', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('slug')->unique();
-            $table->boolean('status')->default(true);
+            $table->string('type');
+            $table->text('data');
+            $table->timestamp('read_at')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateProductAttributesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_attributes');
+        Schema::dropIfExists('notifications');
     }
 }

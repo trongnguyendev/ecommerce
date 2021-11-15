@@ -20,8 +20,7 @@ class CreateProductsTable extends Migration
             $table->text('summary');
             $table->longText('description');
             $table->text('photo');
-            $table->string('stock')->default(1);
-            $table->integer('condition')->default(0);
+            $table->enum('condition', ['default', 'new', 'hot'])->default('default');
             $table->float('price');
             $table->float('discount')->nullable();
             $table->boolean('is_featured')->default(false);
