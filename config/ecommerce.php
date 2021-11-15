@@ -1,12 +1,14 @@
 <?php
 
 return [
-    'response_message_success' => [
+    'response_success' => [
         'category_not_of_product' => 'The specified category is not a category of this product',
+        'logout_success'    => 'Logout success.',
     ],
 
-    'response_message_error' => [
+    'response_error' => [
         'id_not_find'       => 'ID not find',
+        'login_failed'      => 'Login failed!'
     ],
 
     'response_code' => [

@@ -8,27 +8,49 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\ApiController;
-use App\Traits\ApiResponser;
+use App\Repositories\AuthRepository;
+use App\Http\Requests\AuthRequest;
+use App\Http\Requests\LoginRequest;
 
 class AuthController extends ApiController
 {
+    protected $authRepository;
 
-    use ApiResponser;
-
-    public function login(Request $request)
+    public function __construct(AuthRepository $authRepository)
     {
-        
+        $this->authRepository = $authRepository;
     }
 
-    public function register(Request $request)
+    public function login(LoginRequest $request)
     {
-        $credentials = $request->validate([
-            'name'  => ['required'],
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
-        
-        $user = User::create([
+        $data = $request->validated();
+
+        // Check email
+        $user = $this->authRepository->findBy('email', $data['email']);
+
+        // Check password
+        if(!$user || !Hash::check($data['password'], $user->password))
+        {
+            $message = $this->get_message('login_failed', false);
+            return $this->errorResponse($message);
+        }
+
+        $token = $user->createToken('auth-token')->plainTextToken;
+
+        $response = [
+            'users'      => $user,
+            'token'     => $token
+        ];
+
+        return $this->successResponse($response);
+
+    }
+
+    public function register(AuthRequest $request)
+    {
+        $credentials = $request->validated();
+
+        $user = $this->authRepository->create([
             'name'      => $credentials['name'],
             'email'     => $credentials['email'],
             'password'  => bcrypt($credentials['password'])
@@ -37,13 +59,18 @@ class AuthController extends ApiController
         $token = $user->createToken('auth-token')->plainTextToken;
 
         $response = [
-            'data'      => $user,
+            'users'      => $user,
             'token'     => $token
         ];
 
-        $message = $this->response_message('category_not_of_product', 1);
+        return $this->successResponse($response);
+    }
 
-        return $this->successResponse($response, $message);
+    public function logout()
+    {
+        auth()->user()->tokens()->delete();
+
+        return $this->successResponse(array());
     }
 
 }

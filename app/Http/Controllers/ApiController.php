@@ -3,17 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Traits\ApiResponser;
 
 class ApiController extends Controller
 {
-    public function response_message($message, $type)
+    use ApiResponser;
+
+    public function get_message($message, $type)
     {
-        if($type === 1) {
-            $get_message = config('ecommerce.response_message_success');
+        if($type) {
+            $get_message = config('ecommerce.response_success');
         }
 
-        if($type === 0) {
-            $get_message = config('ecommerce.response_message_error');
+        if(!$type) {
+            $get_message = config('ecommerce.response_error');
         }
         
         if(empty($message)) {

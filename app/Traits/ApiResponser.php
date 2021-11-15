@@ -4,26 +4,26 @@ namespace App\Traits;
 
 trait ApiResponser
 {
-    private function successResponse($data, $message = '', $code = 200)
+    protected function successResponse($data, $message = '', $code = 200)
     {
-        return response()->json([
+        $format_json = [
             'success'   => true,
             'data'      => $data,
-            'message'   => $message,
-            'code'      => $code,
-        ]);
+            // 'message'   => $message,
+            // 'code'      => $code,
+        ];
+
+        return response()->json($format_json);
     }
 
     protected function errorResponse($message, $code = 400)
     {
         return response()->json([
             'success'   => false,
-            'code' => $code,
             'error'     => [
                 'code'  => $code,
                 'message'   => $message
             ],
-            
         ]);
     }
 

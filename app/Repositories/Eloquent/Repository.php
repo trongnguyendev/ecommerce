@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Repositores\Contracts\RepositoryInterface;
+use App\Repositories\Contracts\RepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class Repository implements RepositoryInterface
@@ -18,7 +18,7 @@ abstract class Repository implements RepositoryInterface
 
     public function makeModel()
     {
-        $model = $this->app->make($this->model());
+        $model = app()->make($this->model());
 
         if (!$model instanceof Model)
             throw new RepositoryException("Class {$this->model()} must be an instance of Illuminate\\Database\\Eloquent\\Model");
@@ -69,5 +69,9 @@ abstract class Repository implements RepositoryInterface
         return $this->model->where($attribute, '=', $value)->first($columns);
     }
 
+    public function statusActive()
+    {
+        return $this->model->where('status', '=', true)->get();
+    }
 
 }
