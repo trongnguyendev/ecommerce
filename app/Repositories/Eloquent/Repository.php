@@ -43,6 +43,10 @@ abstract class Repository implements RepositoryInterface
 
     public function update(array $data, $id, $attribute = "id")
     {
+        if(empty($data)) {
+            return false;
+        }
+        
         return $this->model->where($attribute, '=', $id)->first()->update($data);
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\V1\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -68,9 +68,23 @@ class AuthController extends ApiController
 
     public function logout()
     {
+        var_dump(auth()->user()->currentAccessToken()); die();
         auth()->user()->tokens()->delete();
 
         return $this->successResponse(array());
+    }
+
+    public function refreshAccessToken()
+    {
+        auth()->user()->currentAccessToken()->delete();
+
+        $newToken = auth()->user()->createToken('auth-token')->plainTextToken;
+
+        $response = [
+            'refresh token'     => $newToken
+        ];
+
+        return $this->successResponse($response);
     }
 
 }

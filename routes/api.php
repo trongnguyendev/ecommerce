@@ -2,8 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Auth\EmailVerificationController;
+use App\Http\Controllers\V1\Auth\AuthController;
+use App\Http\Controllers\V1\Auth\EmailVerificationController;
+use App\Http\Controllers\V1\Brand\BrandController;
+use App\Http\Controllers\V1\Category\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +33,7 @@ Route::prefix('/v1')->group(function () {
         Route::post('register', [AuthController::class, 'register'])->name('register');
 
         Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+        Route::post('refreshToken', [AuthController::class, 'refreshAccessToken'])->name('refreshToken')->middleware('auth:sanctum');
     
     });
 
@@ -38,7 +41,15 @@ Route::prefix('/v1')->group(function () {
        
         // Route::post('/email/verify', [EmailVerificationController::class, 'sendVerificationEmail'])->name('verification.notice');
         // Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])->name('verification.verify');
-    
     });
+
+
+    // Brands
+    Route::resource('brand', BrandController::class);
+
+    // Categories
+    Route::resource('category', CategoryController::class);
+
+    
 
 });

@@ -19,7 +19,7 @@ class CreateCategoriesTable extends Migration
             $table->string('slug')->unique();
             $table->text('summary')->nullable();
             $table->string('photo')->nullable();
-            $table->boolean('is_parent')->default(true);
+            $table->boolean('is_parent')->default(false);
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->boolean('status')->default(true);
             $table->foreign('parent_id')->references('id')->on('categories')->onDelete('SET NULL');
