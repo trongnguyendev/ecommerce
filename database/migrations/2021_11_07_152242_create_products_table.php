@@ -27,7 +27,7 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('child_category_id')->nullable();
             $table->unsignedBigInteger('brand_id')->nullable();
-            $table->boolean('status')->default(false);
+            $table->boolean('status')->default(true);
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('SET NULL');
             $table->foreign('child_category_id')->references('id')->on('categories')->onDelete('SET NULL');
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('SET NULL');

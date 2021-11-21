@@ -10,6 +10,8 @@ use App\Repositories\CategoryRepository;
 use App\Http\Requests\Category\CategoryStoreRequest;
 use App\Http\Requests\Category\CategoryUpdateRequest;
 use Illuminate\Support\Str;
+use App\Http\Resources\Category\Category as CategoryCollection;
+use App\Http\Resources\Category\CategoryResource;
 
 class CategoryController extends ApiController
 {
@@ -25,7 +27,7 @@ class CategoryController extends ApiController
         $categories = $this->categoryRepository->all();
 
         $response = [
-            'categories'    => $categories
+            'categories'    => CategoryResource::collection($categories)
         ];
 
         return $this->successResponse($response);
@@ -35,60 +37,51 @@ class CategoryController extends ApiController
     {
         $data = $request->validated();
 
-        $data['slug'] = Str::slug($data['title']);
-
         $category = $this->categoryRepository->create($data);
 
         $response = [
-            'category' => $category
+            'category' =>  new CategoryResource($category)
         ];
 
         return $this->successResponse($response);
     }
 
-    public function show($id)
+    public function show(Categories $category)
     {
-        $category = $this->categoryRepository->find($id);
-
-        if(empty($category))
-        {
-            return $this->errorResponse('Not find', 404);
-        }
-
         $response = [
-            'category'  => $category
+            'category'  => new CategoryResource($category)
         ];
 
         return $this->successResponse($response);
     }
 
-    public function update(CategoryUpdateRequest $request, $id)
+    public function update(CategoryUpdateRequest $request, Categories $category)
     {
         $data = $request->validated();
 
-        $data['slug'] = Str::slug($data['title']);
-
-        $category = $this->categoryRepository->update($data, $id);
+        $isUpdateCategory = $this->categoryRepository->update($data, $category);
         
-        $response = [
-            'category'  => $this->categoryRepository->find($id)
-        ];
-
-        return $this->successResponse($response);
-
+        if($isUpdateCategory)
+        {
+            $response = [
+                'category'  => new CategoryResource($category)
+            ];
+    
+            return $this->successResponse($response);
+        }
+        
+        return $this->errorResponse('Not Update Product', 400);
     }
 
-    public function destroy($id)
+    public function destroy(Categories $category)
     {
-        $category = $this->categoryRepository->find($id);
+        $isDestroyCategory = $this->categoryRepository->delete($category);
 
-        if(empty($category))
+        if($isDestroyCategory)
         {
-            return $this->errorResponse('Not find', 404);
+            return $this->successResponse('Delete success');
         }
 
-        $this->categoryRepository->delete($id);
-
-        return $this->successResponse('Delete success');
+        return $this->errorResponse('Not Delete Category', 400);
     }
 }

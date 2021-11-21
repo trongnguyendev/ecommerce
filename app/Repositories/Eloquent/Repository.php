@@ -4,6 +4,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Repositories\Contracts\RepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 abstract class Repository implements RepositoryInterface
 {
@@ -28,7 +29,18 @@ abstract class Repository implements RepositoryInterface
 
     public function all($columns = array('*'))
     {
-        return $this->model->orderBy('created_at','desc')->get($columns);
+        $query = $this->model->orderBy('created_at','asc')->where('status', true);
+        
+        return $query->get($columns);        
+    }
+
+    public function allWith($with = '', $columns = array('*'))
+    {
+        if(!empty($with))
+        {
+            return $this->model->orderBy('created_at','asc')->where('status', true)->with($with)->get($columns);
+        }
+        return false;
     }
 
     public function paginate($perPage = 15, $columns = array('*'))
@@ -38,21 +50,42 @@ abstract class Repository implements RepositoryInterface
 
     public function create(array $data)
     {
-        return $this->model->create($data);
-    }
-
-    public function update(array $data, $id, $attribute = "id")
-    {
         if(empty($data)) {
             return false;
         }
-        
-        return $this->model->where($attribute, '=', $id)->first()->update($data);
+
+        if(!empty($data['title']) && empty($data['slug']))
+        {
+            $data['slug'] = Str::slug($data['title']);
+        }
+
+        return $this->model->create($data);
     }
 
-    public function delete($id)
+    public function update(array $data, $_model, $attribute = "id")
     {
-        return $this->model->findOrFail($id)->delete();
+        if(empty($data))
+        {
+            return false;
+        }
+
+        if(!empty($data['title']) && empty($data['slug']))
+        {
+            $data['slug'] = Str::slug($data['title']);
+        }
+
+        if(gettype($_model) == 'object')
+        {
+            return $_model->update($data);
+        }
+        
+        
+        return $this->model->where($attribute, '=', $_model)->first()->update($data);
+    }
+
+    public function delete($_model)
+    {
+        return $_model->delete();
     }
 
     public function find($id, $columns = array('*'))
@@ -73,9 +106,9 @@ abstract class Repository implements RepositoryInterface
         return $this->model->where($attribute, '=', $value)->first($columns);
     }
 
-    public function statusActive()
+    public function active()
     {
-        return $this->model->where('status', '=', true)->get();
+        return $this->model->where('status', true)->get();
     }
 
 }

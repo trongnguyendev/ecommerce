@@ -6,6 +6,7 @@ use App\Http\Controllers\V1\Auth\AuthController;
 use App\Http\Controllers\V1\Auth\EmailVerificationController;
 use App\Http\Controllers\V1\Brand\BrandController;
 use App\Http\Controllers\V1\Category\CategoryController;
+use App\Http\Controllers\V1\Product\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +50,9 @@ Route::prefix('/v1')->group(function () {
 
     // Categories
     Route::resource('category', CategoryController::class);
+
+    // Product
+    Route::resource('product', ProductController::class);
 
     
 

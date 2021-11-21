@@ -11,6 +11,7 @@ use App\Http\Requests\BrandRequest;
 use App\Http\Requests\BrandUpdateRequest;
 use App\Models\Brands;
 use Illuminate\Support\Str;
+use App\Http\Resources\Brand\BrandResource;
 
 class BrandController extends ApiController
 {
@@ -27,7 +28,7 @@ class BrandController extends ApiController
         $brands = $this->brandRepository->all();
 
         $response = [
-            'brands' => $brands
+            'brands' => BrandResource::collection($brands)
         ];
 
         return $this->successResponse($response);
@@ -37,27 +38,19 @@ class BrandController extends ApiController
     {
         $data = $request->validated();
 
-        $data['slug'] = Str::slug($data['title']);
-
         $brand = $this->brandRepository->create($data);
 
         $response = [
-            'brand' => $brand
+            'brand' => new BrandResource($brand)
         ];
 
         return $this->successResponse($response);
     }
 
-    public function show($id)
+    public function show(Brand $brand)
     {
-        $brand = $this->brandRepository->find($id);
-
-        if(empty($brand)) {
-            return $this->errorResponse('Not find', 404);
-        }
-
         $response = [
-            'brand' => $brand
+            'brand' => new BrandResource($brand)
         ];
 
         return $this->successResponse($response);
@@ -67,21 +60,29 @@ class BrandController extends ApiController
     {
         $data = $request->validated();
 
-        $data['slug'] = Str::slug($data['title']);
+        $isUpdateBrand = $this->brandRepository->update($data, $brand->id);
 
-        $this->brandRepository->update($data, $brand->id);
+        if($isUpdateBrand)
+        {
+            $response = [
+                'brand' => $this->brandRepository->find($brand->id)
+            ];
+    
+            return $this->successResponse($response);
+        }
 
-        $response = [
-            'brand' => $this->brandRepository->find($brand->id)
-        ];
-
-        return $this->successResponse($response);
+        return $this->errorResponse('Not Update Brand', 400);
     }
 
-    public function destroy($id)
+    public function destroy(Brands $brand)
     {
-        $this->brandRepository->delete($id);
+        $isDestroyBrand = $this->brandRepository->delete($brand);
 
-        return $this->successResponse();
+        if($isDestroyBrand)
+        {
+            return $this->successResponse('Delete success');
+        }
+
+        return $this->errorResponse('Not Delete Product', 400);
     }
 }
