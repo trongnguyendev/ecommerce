@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <Tutorial/>
-  </div>
+    <nuxt-link to='/'>Index</nuxt-link>
 </template>
 
 <script>
