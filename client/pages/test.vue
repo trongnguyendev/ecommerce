@@ -8,7 +8,7 @@ export default {
     this.$nextTick(() => {
       this.$nuxt.$loading.start()
 
-      setTimeout(() => this.$nuxt.$loading.finish(), 50000)
+      setTimeout(() => this.$nuxt.$loading.finish(), 1000)
     })
   }
 }
