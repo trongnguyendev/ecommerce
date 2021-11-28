@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --color-1st: #fcb800;
+    --color-2nd: #222222;
+
+    --color-text: black;
+    --bg: #f0f2f5;
+    --bg-container: rgb(249, 248, 245);
+
+    --divider: rgba(255, 255, 255, 0);
+    --border: rgb(255 255 255 / 12%);
+
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+
+    --primary-font: 'Work Sans', sans-serif;
+  }
+
+.dark {
+    --color-text: rgb(249, 248, 245);
+    --bg: rgba(55,65,81,1);
+    --bg-container: rgba(37,47,63, 1);
+
+    --divider: rgba(0,0,0,.05);
+    --border: rgb(0 0 0 / 25%);
+}
+
+body {
+    font-family: var(--primary-font) !important;
+    box-sizing: border-box;
+}
+:focus-visible {
+    outline: none !important;
+}
+
+.multiselect__content-wrapper {
+    min-width: 270px !important;
+}
+
+.multiselect__tags {
+    height: 45px !important;
+    padding-top: 13px !important;
+}
+.multiselect__tags {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+.multiselect__select {
+    top: 3px !important;
+}
+.multiselect__single {
+    font-size: 14px !important;
+    padding-top: 0px !important;
+}
+
+header {
+    .dropdown-list {
+        margin-top: 12px !important;
+        left: -24px !important;
+        &:before {
+            background-color: #fff;
+            border-left: 1px solid #e1e1e1;
+            // border-top: 1px solid #e1e1e1;
+            content: "";
+            display: inline-block;
+            height: 10px;
+            position: absolute;
+            left: 30px;
+            top: -6px;
+            transform: rotate(
+        45deg);
+            transform-origin: 50% 50%;
+            width: 10px;
+        }
+    }
+}
+
+.bg-graient-login {
+    background: linear-gradient(
+        136deg, rgb(240, 248, 255) -1%, rgb(219, 238, 255) 85%);
+}
+.p-0-important {
+    padding: 0 !important;
+}
+.p-14-important {
+    padding: 14px !important;
+}
+
+.banner_register_mb {
+    background-image: url('~/assets/images/banner_register_mb.png');
+}
+
+@layer base {
+    .scrolled {
+        @apply bg-black fixed top-0 left-0 w-full z-50
+    }
+    .scrolled .header__top {
+        @apply py-2 duration-75
+    }
+}
