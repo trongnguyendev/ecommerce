@@ -1,9 +1,10 @@
 <template>
     <header
-    class="bg-color-1st duration-75 transition"
+    class="bg-color-1st duration-75 transition relative"
     :class="{ 'scrolled': !view.atTopOfPage }" 
     >
         <div class="container">
+            <!-- header top -->
             <div class="header__top flex justify-between items-center md:py-6 py-2">
                 <div class="logo flex w-52 mr-14">
                     <img src="~/images/logo.png" alt="" class="w-full m-auto">
@@ -146,21 +147,50 @@
 
             </div>
         </div>
+
+        <div class="divider"></div>
         
+        <div class="container">
+            <!-- navigation -->
+            <nav class="">
+                <ul class="flex space-x-7 items-center">
+                    <li
+                    v-for="item in menu" :key="item.name"
+                    class="group cursor-pointer visibility-transition py-3 space-x-8"
+                    >
+                        <NuxtLink to="/" class="text-s-14 flex items-center font-bold">{{ item.name }} <ChevronDownIcon class="ml-1 w-4" v-if="item.sub_menu" /></NuxtLink>
+                        <ul
+                        v-if="item.sub_menu"
+                        class="sub_navigation w-full absolute top-full left-0 p-7 bg-white z-10"
+                        >
+                            <div class="container m-auto flex space-x-8">
+                                <li v-for="item_sub in item.sub_menu" :key="item_sub.name">
+                                    <a href="" class="block text-center text-s-12">
+                                        <img :src="require('/assets/images/' + item_sub.picture)" class="w-16 m-auto" />
+                                        {{ item_sub.sub_name }}
+                                    </a>
+                                </li>
+                            </div>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
 
     </header>
 </template>
 
 <script>
 import { UserIcon, UserCircleIcon } from "@vue-hero-icons/outline"
-import { XIcon, MailIcon, KeyIcon } from "@vue-hero-icons/solid"
+import { XIcon, MailIcon, KeyIcon, ChevronDownIcon } from "@vue-hero-icons/solid"
 export default {
     components: {
         UserIcon,
         XIcon,
         MailIcon,
         KeyIcon,
-        UserCircleIcon
+        UserCircleIcon,
+        ChevronDownIcon
     },
     data() {
         return {
@@ -169,7 +199,158 @@ export default {
             form: 'login',
             view: {
                 atTopOfPage: true
-            }
+            },
+            img1: require('assets/images/menu1.jpg'),
+            menu: [
+                {
+                    name : 'Wallets',
+                    sub_menu: [
+                        {
+                            sub_name : "Men's Wallter",
+                            picture : 'menu2.jpg'
+                        },
+                        {
+                            sub_name : "Wommen's Wallter",
+                            picture : 'menu1.jpg'
+                        },
+                        {
+                            sub_name : "Kid's Wallter",
+                            picture : 'menu2.jpg'
+                        },
+                        {
+                            sub_name : "Billliords",
+                            picture : 'menu3.jpg'
+                        },
+                        {
+                            sub_name : "Card Holders",
+                            picture : 'Billfolds.jpg'
+                        },
+                    ]
+                },
+                {
+                    name : 'Wallets',
+                    sub_menu: [
+                        {
+                            sub_name : "Men's Wallter",
+                            picture : 'menu2.jpg'
+                        },
+                        {
+                            sub_name : "Wommen's Wallter",
+                            picture : 'menu1.jpg'
+                        },
+                        {
+                            sub_name : "Kid's Wallter",
+                            picture : 'menu2.jpg'
+                        },
+                        {
+                            sub_name : "Billliords",
+                            picture : 'menu3.jpg'
+                        },
+                        {
+                            sub_name : "Card Holders",
+                            picture : 'Billfolds.jpg'
+                        },
+                    ]
+                },
+                {
+                    name : 'Card',
+                    sub_menu: [
+                        {
+                            sub_name : "Business Card",
+                            picture : 'Pixel_Cases.jpg'
+                        },
+                        {
+                            sub_name : "Holder",
+                            picture : 'Card_Holders.jpg'
+                        },
+                        {
+                            sub_name : "Folios",
+                            picture : 'Folios.jpg'
+                        },
+                        {
+                            sub_name : "Key Cover",
+                            picture : 'Key_Covers.jpg'
+                        },
+                        {
+                            sub_name : "Passport Holders",
+                            picture : 'Passport_Holders.jpg'
+                        },
+                    ]
+                },
+
+                {
+                    name : 'Tech',
+                    sub_menu: [
+                        {
+                            sub_name : "Pixel Case",
+                            picture : 'Pixel_Cases.jpg'
+                        },
+                        {
+                            sub_name : "Pouches",
+                            picture : 'Pouches.jpg'
+                        },
+                        {
+                            sub_name : "Folios",
+                            picture : 'Folios.jpg'
+                        }
+                    ]
+                },
+                {
+                    name : 'Electricity',
+                    sub_menu: [
+                        {
+                            sub_name : "Elecitricty 1",
+                            picture : 'Pixel_Cases.jpg'
+                        },
+                        {
+                            sub_name : "Elecitricty 2",
+                            picture : 'Pouches.jpg'
+                        },
+                        {
+                            sub_name : "Elecitricty 3",
+                            picture : 'Folios.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: 'Hexel'
+                },
+                {
+                    name : 'Water',
+                    sub_menu: [
+                        {
+                            sub_name : "Water 1",
+                            picture : 'Pixel_Cases.jpg'
+                        },
+                        {
+                            sub_name : "Water 2",
+                            picture : 'Pouches.jpg'
+                        },
+                        {
+                            sub_name : "Water 3",
+                            picture : 'Folios.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: "Righlex"
+                },
+                {
+                    name: "Multate"
+                },
+                {
+                    name: "Conback"
+                },
+                {
+                    name: "Netline"
+                },
+                {
+                    name: "Sunoun"
+                },
+                {
+                    name: "Ratbex"
+                },
+            ]
         }
     },
     methods: {

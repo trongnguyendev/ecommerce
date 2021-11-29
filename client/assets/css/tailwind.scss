@@ -10,7 +10,7 @@
     --bg: #f0f2f5;
     --bg-container: rgb(249, 248, 245);
 
-    --divider: rgba(255, 255, 255, 0);
+    --divider: rgba(255, 255, 255);
     --border: rgb(255 255 255 / 12%);
 
     --breakpoint-xs: 0;
@@ -19,7 +19,7 @@
     --breakpoint-lg: 992px;
     --breakpoint-xl: 1200px;
 
-    --primary-font: 'Work Sans', sans-serif;
+    --primary-font: 'Roboto', Helvetica, sans-serif;
   }
 
 .dark {
@@ -96,11 +96,26 @@ header {
     background-image: url('~/assets/images/banner_register_mb.png');
 }
 
+.visibility-transition ul {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s;
+}
+.visibility-transition:hover > ul {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+
 @layer base {
     .scrolled {
         @apply bg-black fixed top-0 left-0 w-full z-50
     }
     .scrolled .header__top {
         @apply py-2 duration-75
+    }
+    .divider {
+        @apply w-full h-[1px] bg-black opacity-20
     }
 }
