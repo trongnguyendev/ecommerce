@@ -39,6 +39,10 @@ body {
     outline: none !important;
 }
 
+.h-345 {
+    height: 345px;
+}
+
 .multiselect__content-wrapper {
     min-width: 270px !important;
 }
@@ -106,6 +110,20 @@ header {
     opacity: 1;
 }
 
+// custom banner slide 
+.banner {
+    .VueCarousel-navigation-button {
+        margin-top: -10px !important;
+        background: #000000b0 !important;
+        color: white !important;
+    }
+    .VueCarousel-navigation-prev {
+        left: 28px !important;
+    }
+    .VueCarousel-navigation-next {
+        right: 28px !important;
+    }
+}
 
 
 @layer base {
@@ -118,4 +136,6 @@ header {
     .divider {
         @apply w-full h-[1px] bg-black opacity-20
     }
+
+    
 }

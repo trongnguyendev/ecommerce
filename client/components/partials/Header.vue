@@ -161,7 +161,7 @@
                         <NuxtLink to="/" class="text-s-14 flex items-center font-bold">{{ item.name }} <ChevronDownIcon class="ml-1 w-4" v-if="item.sub_menu" /></NuxtLink>
                         <ul
                         v-if="item.sub_menu"
-                        class="sub_navigation w-full absolute top-full left-0 p-7 bg-white z-10"
+                        class="sub_navigation w-full absolute top-full left-0 p-7 bg-white z-10 mx-0"
                         >
                             <div class="container m-auto flex space-x-8">
                                 <li v-for="item_sub in item.sub_menu" :key="item_sub.name">
@@ -228,7 +228,7 @@ export default {
                     ]
                 },
                 {
-                    name : 'Wallets',
+                    name : 'Wallets1',
                     sub_menu: [
                         {
                             sub_name : "Men's Wallter",
