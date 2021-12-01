@@ -2,7 +2,17 @@
   <div>
 
     <BannerSlide />
+
+    <SiteFeature />
+
+    <SubBanner />
+
+    <CategoryFeature />
+
     <BeakerIcon class="h-5 w-5 text-blue-500"/>
+
+    
+
     <AdjustmentsIcon />
     
     <div x-data="drawer()">

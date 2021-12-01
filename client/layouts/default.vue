@@ -2,7 +2,7 @@
   <div class="ecommerce">
     <PartialsHeader />  
 
-    <Nuxt class="bg-bg pt-4 pb-4" />
+    <Nuxt class="bg-bg-container py-4 grid gap-5" />
 
     <MobileDock />
   </div>
