@@ -13,6 +13,9 @@
     --divider: rgba(255, 255, 255);
     --border: rgb(255 255 255 / 12%);
 
+    --yellow: rgb(253, 216, 54);
+    --red: rgb(255, 66, 78);
+
     --breakpoint-xs: 0;
     --breakpoint-sm: 576px;
     --breakpoint-md: 768px;
@@ -132,9 +135,6 @@ header {
     }
     .scrolled .header__top {
         @apply py-2 duration-75
-    }
-    .divider {
-        @apply w-full h-[1px] bg-black opacity-20
     }
 
     

@@ -29,6 +29,8 @@ module.exports = {
         'border'        : 'var(--border)',
         'from-radient'  : '136deg, rgb(240, 248, 255) -1%',
         'to-radient'    : 'rgb(219, 238, 255) 85%',
+        'cl-star'          : 'var(--yellow)',
+        'cl-red'          : 'var(--red)',
 
         primary: {
           // light: "#fefcbf", // For lighter primary color
@@ -38,6 +40,17 @@ module.exports = {
       },
       backgroundImage: {
         'banner-register' : "url('~/assets/images/banner_register.png')",
+      },
+      gridTemplateColumns: {
+        'auto-fit': 'repeat(auto-fit, minmax(100px, 1fr))',
+        'auto-fit-320': 'repeat(auto-fit, minmax(210px, 1fr))',
+        'auto-fit-170': 'repeat(auto-fit, minmax(170px, 1fr))',
+      },
+      gridTemplateRows: {
+        'repeat-2': 'repeat(2, minmax(100px, 1fr))'
+      },
+      height: {
+        '67' : '16.813rem'
       },
     },
     fontFamily: false,

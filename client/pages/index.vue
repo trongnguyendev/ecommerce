@@ -9,6 +9,10 @@
 
     <CategoryFeature />
 
+    <BannerBody />
+
+    <ProductToday />
+
     <BeakerIcon class="h-5 w-5 text-blue-500"/>
 
     
