@@ -31,6 +31,7 @@ module.exports = {
         'to-radient'    : 'rgb(219, 238, 255) 85%',
         'cl-star'          : 'var(--yellow)',
         'cl-red'          : 'var(--red)',
+        'cl-red_2'      : 'var(--red_2)',
 
         primary: {
           // light: "#fefcbf", // For lighter primary color

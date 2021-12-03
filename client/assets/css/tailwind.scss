@@ -15,6 +15,7 @@
 
     --yellow: rgb(253, 216, 54);
     --red: rgb(255, 66, 78);
+    --red_2: #ff424f59;
 
     --breakpoint-xs: 0;
     --breakpoint-sm: 576px;
@@ -126,6 +127,32 @@ header {
     .VueCarousel-navigation-next {
         right: 28px !important;
     }
+}
+
+.rotatey-180 {
+    transform: rotateY(180deg);
+}
+
+.special {
+    line-height: 1.2;
+    &::after {
+        content: "";
+        width: 0;
+        height: 0;
+        left: 0;
+        bottom: -4px;
+        position: absolute;
+        border-color: transparent var(--color-1st);
+        border-style: solid;
+        border-width: 0 21.8px 4px;
+    }
+}
+
+.line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
 }
 
 

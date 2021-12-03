@@ -4,22 +4,17 @@
             <HeadingTitle name="Gợi Ý Hôm Nay" class="" />
         </div>
         <div class="grid grid-cols-auto-fit-170 lg:grid-cols-auto-fit-320 gap-4">
-            <NuxtLink to="/" class="product shadow-sm rounded-sm hover:shadow-xl block" v-for="item in 20" :key="item">
-                <img src="~/images/product1.jpeg" alt="" class="w-full">
-                <div class="p-2 bg-bg gap-3">
-                    <h1 class="text-s-12 text-color-t">Máy Phun Sương Khuêch Tán Tinh Dầu Aroma Cao Câp Tạo Ẩm Và Diệt Khuẩn</h1>
-                    <div class="">
-                        <div class="flex justify-between">
-                            <div class="flex gap-[2px]"><StarIcon v-for="item in 5" :key="item" class="w-4 h-4 text-cl-star" /></div>
-                            <span class="text-s-10 text-color-t opacity-50">Đã bán 308</span>
-                        </div>
-                        <div class="text-s-16 text-cl-red font-semibold flex items-center">
-                            <span>26.000 ₫</span>
-                            <span class="text-cl-red border-cl-red border-[1px] p-[1px] rounded-sm text-s-10 block ml-2">-35%</span>
-                        </div>
-                    </div>
-                </div>
-            </NuxtLink>
+            <div v-for="product in products" :key="product.title">
+                <ProductItem
+                :title="product.title"
+                :price="product.price"
+                :discount="product.discount"
+                :percent="product.percent"
+                :star="product.star"
+                :bought="product.bought"
+                :picture="product.picture"
+                />
+            </div>
         </div>
     </div>
 </template>
@@ -33,7 +28,20 @@ export default {
     },
     data() {
         return {
-            product: []
+            products: [
+                { title: 'title 1', price: '35.000', discount: '26.000', percent: '35', star: 1.7, bought: '313', picture: 'product1.jpeg' },
+                { title: 'title 2', price: '125.000', discount: '100.000', percent: '27', star: 3, bought: '400', picture: 'product6.png' },
+                { title: 'title 3', price: '99.000', discount: '0', percent: '0', star: 2.5, bought: '33', picture: 'product4.jpeg' },
+                { title: 'title 4', price: '235.000', discount: '150.000', percent: '78', star: 2, bought: '29', picture: 'product5.jpeg' },
+                { title: 'title 3', price: '99.000', discount: '78.000', percent: '30', star: 2.5, bought: '33', picture: 'product4.jpeg' },
+                { title: 'title 4', price: '235.000', discount: '150.000', percent: '78', star: 2, bought: '29', picture: 'product5.jpeg' },
+                { title: 'title 3', price: '99.000', discount: '78.000', percent: '30', star: 2.5, bought: '33', picture: 'product4.jpeg' },
+                { title: 'title 4', price: '235.000', discount: '150.000', percent: '78', star: 2, bought: '29', picture: 'product5.jpeg' },
+                { title: 'title 3', price: '99.000', discount: '78.000', percent: '30', star: 2.5, bought: '33', picture: 'product4.jpeg' },
+                { title: 'title 4', price: '235.000', discount: '150.000', percent: '78', star: 2, bought: '29', picture: 'product5.jpeg' },
+                { title: 'title 3', price: '99.000', discount: '78.000', percent: '30', star: 2.5, bought: '33', picture: 'product4.jpeg' },
+                { title: 'title 4', price: '235.000', discount: '150.000', percent: '78', star: 2, bought: '29', picture: 'product5.jpeg' },
+            ]
         }
     }
 }
