@@ -5,11 +5,17 @@
 
     <SiteFeature />
 
-    <SubBanner />
-
+    <BannerBody />
+    
     <CategoryFeature />
 
-    <BannerBody />
+    <SubBanner />
+
+    <ProductByCategory />
+
+    <ProductByCategory />
+
+    <ProductByCategory />
 
     <ProductToday />
 
