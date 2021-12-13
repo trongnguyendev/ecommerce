@@ -46,7 +46,8 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/auth-next'
+    '@nuxtjs/auth-next',
+    'nuxt-buefy'
   ],
 
   tailwindcss : {
@@ -58,7 +59,22 @@ export default {
   },
 
   auth: {
+    strategies: {
+      cookie: {
+        cookie: {
+          name: 'XSRF-TOKEN'
+        },
+      },
 
+      laravelSanctum: {
+        provider: 'laravel/sanctum',
+        url: 'http://localhost:88',
+        endpoints: {
+          login: { url: '/api/v1/auth/login'},
+          user: false
+        }
+      },
+    }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -72,4 +88,20 @@ export default {
   },
 
   loading: '~/components/loading.vue',
+
+  router: {
+    // middleware: ['auth']
+  },
+
+  axios: {
+    proxy: true,
+    credential: true
+  },
+
+  proxy: {
+    '/laravel': {
+      target: 'https://laravel-auth.nuxtjs.app',
+      pathRewrite: { '^/laravel': '/' }
+    }
+  },
 }

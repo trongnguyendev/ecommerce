@@ -33,12 +33,15 @@ Route::prefix('/v1')->group(function () {
 
         Route::post('register', [AuthController::class, 'register'])->name('register');
 
+
         Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
         Route::post('refreshToken', [AuthController::class, 'refreshAccessToken'])->name('refreshToken')->middleware('auth:sanctum');
     
     });
 
     Route::middleware(['auth:sanctum'])->group(function() {
+
+        Route::get('user', [AuthController::class, 'user'])->name('user');
        
         // Route::post('/email/verify', [EmailVerificationController::class, 'sendVerificationEmail'])->name('verification.notice');
         // Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])->name('verification.verify');

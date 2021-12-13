@@ -25,7 +25,15 @@
                 </form>
 
                 <div class="flex justify-end items-center ml-7">
-                    <div x-data="dropdown()" class="hidden lg:block">
+                    <div @click="toggleMode()" class="cursor-pointer">
+                        <div v-if="$colorMode.value == 'dark'" >
+                            <IconsLight class="w-8 h-8" />
+                        </div>
+                        <div v-if="$colorMode.value == 'light'">
+                            <IconsDark class="w-8 h-8" />
+                        </div>
+                    </div>
+                    <div x-data="dropdown()" class="hidden lg:block ml-7">
                         <div class="relative cursor-pointer" id="bottom" x-spread="trigger">
                             <IconsCart  class="w-8 h-8" />
                             <span class="absolute top-[-2px] right-[-10px] bg-black text-white block w-5 h-5 text-s-11 pt-[2px] rounded-full text-center">0</span>
@@ -48,12 +56,15 @@
                     <div x-data="dialog()">
                         <div class="flex ml-7 cursor-pointer items-center" x-spread="trigger">
                             <UserCircleIcon class="w-8 h-8 stroke-0 font-thin" />
-                            <div class="ml-1 hidden xl:block">
+                            <div class="ml-1 hidden xl:block" v-if="!isLogged">
                                 <h5 class="text-s-13">Đăng nhập</h5>
                                 <h5 class="text-s-13">Đăng kí</h5>
                             </div>
+                            <div class="ml-1 hidden xl:block" v-if="isLogged">
+                                <h5 class="text-s-13">{{ currentUser.name }}</h5>
+                            </div>
                         </div>
-                        <div class="dialog" x-spread="dialog" x-cloak>
+                        <div class="dialog" x-spread="dialog" x-cloak v-if="!isLogged">
                             <div class="dialog-content top-0 lg:top-24 lg:w-[800px] relative rounded-none lg:rounded-xl">
                                 <!-- <div class="dialog-header">Dialog Title
                                     <button type="button" class="btn btn-light btn-sm btn-icon" aria-label="Close" @click="close">
@@ -104,18 +115,18 @@
                                                 <h1 class="text-s-17 mb-5">Đăng nhập tài khoản</h1>
                                                 <div class="form-icon mb-3">
                                                     <MailIcon />
-                                                    <input class="form-input" placeholder="Mail...">
+                                                    <input class="form-input" v-model="login.username" placeholder="Mail...">
                                                 </div>
                                                 <div class="form-icon mb-3">
                                                     <KeyIcon />
-                                                    <input class="form-input" placeholder="Mật khẩu...">
+                                                    <input class="form-input" v-model="login.password" placeholder="Mật khẩu...">
                                                 </div>
                                                 <label class="flex items-center mb-3">
                                                     <input type="checkbox" class="form-checkbox">
                                                     <span class="ml-2 cursor-pointer text-color-gray text-s-14">Ghi nhớ đăng nhập</span>
                                                 </label>
 
-                                                <button class="bg-color-1st text-14 text-black w-full py-3 font-bold">Đăng nhập</button>
+                                                <button class="bg-color-1st text-14 text-black w-full py-3 font-bold" @click="userLogin">Đăng nhập</button>
                                             </div>
                                             <div class="mt-2">
                                                 <p v-if="form == 'register'" class="text-s-12 text-color-gray text-center">Bạn đã có tài khoản? <span @click="switchForm" class="text-blue-700 cursor-pointer">Đăng nhập</span></p>
@@ -143,13 +154,21 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
 
             </div>
+            <b-button
+                label="Launch toast (default)"
+                size="is-medium"
+                type="is-success"
+                @click="toast" />
         </div>
 
         <div class="divider"></div>
         
+        
+
         <div class="container">
             <!-- navigation -->
             <nav class="">
@@ -350,10 +369,42 @@ export default {
                 {
                     name: "Ratbex"
                 },
-            ]
+            ],
+            currentMode: 'dark',
+            login: {
+                username: 'trongnguyendev@gmail.com',
+                password: 'a1234567'
+            },
+            currentUser: '',
+            isLogged: false,
         }
     },
     methods: {
+        async userLogin() {
+            try {
+                
+                let response = await this.$auth.loginWith('laravelSanctum', {
+                    data: {
+                        email: this.login.username,
+                        password: this.login.password
+                    }
+                })
+                this.currentUser = response.data.data.users
+                this.isLogged = this.$auth.loggedIn
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        toast() {
+                 this.$buefy.toast.open({
+
+                    duration: 500000,
+                    message: `Something's not good, also I'm on <b>bottom</b>`,
+                    position: 'is-bottom',
+                    type: 'is-danger'
+                })
+            },
+
         switchForm() {
             this.form = this.form == 'login' ? 'register' : 'login'
         },
@@ -363,7 +414,10 @@ export default {
             }else{
                 if(!this.view.atTopOfPage) this.view.atTopOfPage = true
             }
-        }
+        },
+        toggleMode() {
+            this.$colorMode.preference = this.$colorMode.value == "light" ? "dark" : "light";
+        },
     },
     
     beforeMount () {

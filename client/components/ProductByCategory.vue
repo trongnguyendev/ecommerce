@@ -11,7 +11,7 @@
                     :paginationEnabled="false"
                     :perPageCustom="[[640, 2], [768, 3], [1024, 4], [1280, 6], []]"
                     >
-                        <slide v-for="product in products" :key="product.title">
+                        <slide v-for="product in products" :key="product.title" class="px-3">
                             <ProductItem
                                 :title="product.title"
                                 :price="product.price"
@@ -20,10 +20,15 @@
                                 :star="product.star"
                                 :bought="product.bought"
                                 :picture="product.picture"
+                                class="border-[1px] dark:border-color-gray"
                                 />
                         </slide>
                     </carousel>
                 </client-only>
+
+                <div class="py-4">
+                    <NuxtLink to="/" class="m-auto p-2 text-color-1st hover:text-white border-2 border-color-1st bg-bg hover:bg-color-1st w-52 block text-s-14 text-center rounded-sm">XEM TẤT CẢ SẢN PHẨM</NuxtLink>
+                </div>
             </div>
         </div>
     </div>

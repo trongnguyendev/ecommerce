@@ -9,13 +9,14 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@nuxtjs/auth-next": "5.0.0-1637333559.35dbd53",
+    "@nuxtjs/auth-next": "^5.0.0-1637333559.35dbd53",
     "@nuxtjs/axios": "^5.13.6",
     "@vue-hero-icons/outline": "^1.7.2",
     "@vue-hero-icons/solid": "^1.7.2",
     "core-js": "^3.15.1",
     "kutty": "^0.5.2",
     "nuxt": "^2.15.7",
+    "nuxt-buefy": "^0.4.13",
     "vue-carousel": "^0.18.0",
     "vue-multiselect": "^2.1.6"
   },

@@ -68,7 +68,6 @@ class AuthController extends ApiController
 
     public function logout()
     {
-        var_dump(auth()->user()->currentAccessToken()); die();
         auth()->user()->tokens()->delete();
 
         return $this->successResponse(array());
@@ -82,6 +81,15 @@ class AuthController extends ApiController
 
         $response = [
             'refresh token'     => $newToken
+        ];
+
+        return $this->successResponse($response);
+    }
+
+    public function user(Request $request)
+    {
+        $response = [
+            'user'     => $request->user()
         ];
 
         return $this->successResponse($response);

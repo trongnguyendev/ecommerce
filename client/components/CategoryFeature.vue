@@ -1,7 +1,7 @@
 <template>
     <div class="container bg-bg-container">
-        <div class="bg-bg p-5 rounded-sm overflow-hidden">
-            <HeadingTitle name="Danh Mục Nổi Bật" class="mb-5" />
+        <div class="bg-bg p-5 rounded-sm overflow-hidden shadow-md">
+            <HeadingTitle name="Danh Mục Nổi Bật" class="mb-5 uppercase" />
             <div class="grid grid-cols-auto-fit h-67 overflow-hidden gap-5 px-3">
                 <NuxtLink to="/" v-for="item in category" :key="item.name" class="rounded-md hover:bg-bg-container">
                     <img :src="require('/assets/images/' + item.picture)" class="w-16 h-16 rounded-lg m-auto mb-4" alt="">
