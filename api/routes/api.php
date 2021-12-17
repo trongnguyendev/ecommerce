@@ -19,33 +19,32 @@ use App\Http\Controllers\V1\Product\ProductController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function(Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function(Request $request) {
+//     return $request->user();
+// });
 
 
 
 Route::prefix('/v1')->group(function () {
 
-    Route::group(['prefix' => 'auth'], function() {
-
+    Route::group([
+        'middleware' => 'api',
+        'prefix' => 'auth'
+    ], function() {
         Route::post('login', [AuthController::class, 'login'])->name('login');
-
+        Route::post('logout', [AuthController::class, 'logout']);
+        Route::post('refresh', [AuthController::class, 'refreshAccessToken'])->name('refreshToken');
         Route::post('register', [AuthController::class, 'register'])->name('register');
-
-
-        Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
-        Route::post('refreshToken', [AuthController::class, 'refreshAccessToken'])->name('refreshToken')->middleware('auth:sanctum');
-    
+        Route::get('me', [AuthController::class, 'user'])->name('user');
     });
 
-    Route::middleware(['auth:sanctum'])->group(function() {
+    // Route::middleware(['auth:sanctum'])->group(function() {
 
-        Route::get('user', [AuthController::class, 'user'])->name('user');
+    //     Route::get('user', [AuthController::class, 'user'])->name('user');
        
-        // Route::post('/email/verify', [EmailVerificationController::class, 'sendVerificationEmail'])->name('verification.notice');
-        // Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])->name('verification.verify');
-    });
+    //     // Route::post('/email/verify', [EmailVerificationController::class, 'sendVerificationEmail'])->name('verification.notice');
+    //     // Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])->name('verification.verify');
+    // });
 
 
     // Brands

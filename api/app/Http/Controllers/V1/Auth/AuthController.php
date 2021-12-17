@@ -6,9 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Support\Facades\Hash;
+
 use App\Http\Controllers\ApiController;
+
 use App\Repositories\AuthRepository;
+
 use App\Http\Requests\AuthRequest;
 use App\Http\Requests\LoginRequest;
 
@@ -18,31 +22,56 @@ class AuthController extends ApiController
 
     public function __construct(AuthRepository $authRepository)
     {
+        $this->middleware('auth:api', ['except' => ['login']]);
         $this->authRepository = $authRepository;
+    }
+
+    /**
+     * Get the token array structure.
+     *
+     * @param  string $token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function respondWithToken($token)
+    {
+        $response = [
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60
+        ];
+
+        return $this->successResponse($response);
     }
 
     public function login(LoginRequest $request)
     {
-        $data = $request->validated();
+        $credentials = $request->validated();
 
-        // Check email
-        $user = $this->authRepository->findBy('email', $data['email']);
-
-        // Check password
-        if(!$user || !Hash::check($data['password'], $user->password))
-        {
-            $message = $this->get_message('login_failed', false);
-            return $this->errorResponse($message);
+        if (! $token = auth()->attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        $token = $user->createToken('auth-token')->plainTextToken;
+        return $this->respondWithToken($token);
 
-        $response = [
-            'users'      => $user,
-            'token'     => $token
-        ];
+        // Check email
+        // $user = $this->authRepository->findBy('email', $data['email']);
 
-        return $this->successResponse($response);
+        // Check password
+        // if(!$user || !Hash::check($data['password'], $user->password))
+        // {
+        //     $message = $this->get_message('login_failed', false);
+        //     return $this->errorResponse($message);
+        // }
+
+        // $token = $user->createToken('auth-token')->plainTextToken;
+
+        // $response = [
+        //     'users'      => $user,
+        //     'token'     => $token
+        // ];
+
+        // return $this->successResponse($response);
 
     }
 
@@ -56,7 +85,7 @@ class AuthController extends ApiController
             'password'  => bcrypt($credentials['password'])
         ]);
 
-        $token = $user->createToken('auth-token')->plainTextToken;
+        $token = auth()->attempt($credentials);
 
         $response = [
             'users'      => $user,
@@ -68,16 +97,14 @@ class AuthController extends ApiController
 
     public function logout()
     {
-        auth()->user()->tokens()->delete();
+        auth()->logout();
 
-        return $this->successResponse(array());
+        return $this->successResponse(['message' => 'Successfully logged out']);
     }
 
     public function refreshAccessToken()
     {
-        auth()->user()->currentAccessToken()->delete();
-
-        $newToken = auth()->user()->createToken('auth-token')->plainTextToken;
+        $newToken = auth()->refresh();
 
         $response = [
             'refresh token'     => $newToken
@@ -86,10 +113,10 @@ class AuthController extends ApiController
         return $this->successResponse($response);
     }
 
-    public function user(Request $request)
+    public function user()
     {
         $response = [
-            'user'     => $request->user()
+            'user'     => auth()->user()
         ];
 
         return $this->successResponse($response);

@@ -6,12 +6,7 @@ trait ApiResponser
 {
     protected function successResponse($data, $message = '', $code = 200)
     {
-        $format_json = [
-            'success'   => true,
-            'data'      => $data,
-            // 'message'   => $message,
-            // 'code'      => $code,
-        ];
+        $format_json = array_merge(['success' => true], $data);
 
         return response()->json($format_json);
     }

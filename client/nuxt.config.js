@@ -30,7 +30,8 @@ export default {
   plugins: [
     { src: '~/plugins/bootstrap.js', mode: 'client' },
     { src: '~/plugins/vue-multiselect', mode: 'client' },
-    { src: '~/plugins/vue-carousel.js', mode: 'client' }
+    { src: '~/plugins/vue-carousel.js', mode: 'client' },
+    { src: '~/plugins/axios' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -47,34 +48,43 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
-    'nuxt-buefy'
   ],
-
-  tailwindcss : {
-
-  },
 
   colorMode: {
     classSuffix: ""
   },
 
-  auth: {
-    strategies: {
-      cookie: {
-        cookie: {
-          name: 'XSRF-TOKEN'
-        },
-      },
+  axios: {
+    credentials: true,
+    baseUrl: "http://localhost:88"  
+  },
 
-      laravelSanctum: {
-        provider: 'laravel/sanctum',
+  auth: {
+    redirect: {
+      login: '/login',
+      logout: '/',
+      callback: '/',
+      index: '/'
+    },
+    strategies: {
+      'laravelJWT': {
+        provider: 'laravel/jwt',
         url: 'http://localhost:88',
         endpoints: {
           login: { url: '/api/v1/auth/login'},
-          user: false
-        }
+          refresh: { url: '/api/v1/auth/refreshToken' },
+          logout: { url: '/api/v1/auth/logout' },
+          user: { url: '/api/v1/auth/me' },
+        },
+        token: {
+          property: 'access_token',
+          maxAge: 60 * 60
+        },
+        refreshToken: {
+          maxAge: 20160 * 60
+        },
       },
-    }
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -90,18 +100,12 @@ export default {
   loading: '~/components/loading.vue',
 
   router: {
-    // middleware: ['auth']
-  },
-
-  axios: {
-    proxy: true,
-    credential: true
-  },
-
-  proxy: {
-    '/laravel': {
-      target: 'https://laravel-auth.nuxtjs.app',
-      pathRewrite: { '^/laravel': '/' }
+    extendRoutes(routes, resolve) {
+      routes.push({
+        name: 'custom',
+        path: '*',
+        component: resolve(__dirname, 'pages/404.vue')
+      })
     }
   },
 }

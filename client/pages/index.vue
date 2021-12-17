@@ -11,25 +11,13 @@
 
     <SubBanner />
 
-    <ProductToday />
+    <!-- <ProductToday /> -->
 
     <!-- <ProductByCategory /> -->
 
     <!-- <ProductByCategory />
 
     <ProductByCategory /> -->
-
-     <b-carousel>
-        <b-carousel-item v-for="(carousel, i) in carousels" :key="i">
-            <section :class="`hero is-medium is-${carousel.color}`">
-                <div class="hero-body has-text-centered">
-                    <h1 class="title">{{carousel.text}}</h1>
-                </div>
-            </section>
-        </b-carousel-item>
-    </b-carousel>
-
-    
 
     
   </div>
@@ -43,6 +31,10 @@ export default {
   components: {
     AdjustmentsIcon,
     BeakerIcon
+  },
+
+  created() {
+    console.log(this.$auth.loggedIn);
   },
 
   data(){
@@ -67,7 +59,7 @@ export default {
     this.$nextTick(() => {
       this.$nuxt.$loading.start()
 
-      setTimeout(() => this.$nuxt.$loading.finish(), 1000)
+      setTimeout(() => this.$nuxt.$loading.finish(), 500)
     })
   }
 }
