@@ -31,7 +31,6 @@ export default {
     { src: '~/plugins/bootstrap.js', mode: 'client' },
     { src: '~/plugins/vue-multiselect', mode: 'client' },
     { src: '~/plugins/vue-carousel.js', mode: 'client' },
-    { src: '~/plugins/axios' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

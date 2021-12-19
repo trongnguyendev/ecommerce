@@ -54,7 +54,6 @@
                     </div>
                     
                     <NuxtLink to="/login" class="flex ml-7 cursor-pointer items-center" v-if="!$auth.loggedIn">
-                        <!-- <UserCircleIcon class="w-8 h-8 stroke-0 font-thin" /> -->
                         <div class="avatar bg-color-1st text-black border-black border-2 avatar-sm"><UserIcon class="w-8 h-8 stroke-0 font-thin" /></div>
                         <div class="ml-1 hidden xl:block" >
                             <h5 class="text-s-13">Đăng nhập</h5>
@@ -63,21 +62,17 @@
                     </NuxtLink>
 
                     <div class="flex ml-7 cursor-pointer items-center" v-if="$auth.loggedIn">
-                        <!-- <div class="avatar bg-color-1st text-black border-black border-2 avatar-sm">TN</div>
-                        <div class="ml-1 hidden xl:block" v-if="$auth.loggedIn">
-                            
-                            <button @click="userLogout">Logout</button>
-                        </div> -->
-
                         <div x-data="dropdown()" class="relative">
                             <div x-spread="trigger" class="flex items-center gap-2">
-                                <div class="avatar bg-black text-color-1st avatar-sm">{{ nameUser }}</div>
-                                <div>
+                                <div class="avatar bg-black text-color-1st avatar-sm avatar-busy">
+                                    {{ nameUser }}
+                                </div>
+                                <div class="leading-4">
                                     <span class="text-s-11">Tài khoản</span>
                                     <h5 class="text-s-14">{{ $auth.user.user.name }}</h5>
                                 </div>
                             </div>
-                            <div class="dropdown-list bg-bg px-0 dark:border-bg" x-spread="dropdown" x-cloak>
+                            <div class="dropdown-list bg-bg px-0 dark:border-bg transform-none translate-x-0" x-spread="dropdown" x-cloak>
                                 <ul class="list list-flush">
                                     <li class="text-color-t hover:bg-gray-200 dark:hover:bg-gray-500 text-s-12 p-3">Đơn hàng của tôi</li>
                                     <li class="text-color-t hover:bg-gray-200 dark:hover:bg-gray-500 text-s-12 p-3">Tài khoản của tôi</li>
@@ -97,9 +92,7 @@
             </div>
         </div>
 
-        <div class="divider"></div>
-        
-        
+        <div class="divider"></div>        
 
         <div class="container">
             <!-- navigation -->
@@ -324,35 +317,17 @@ export default {
             return name + name2
         }
     },
-    created() {
-        this.getAuthenticatedUser()
-    },
 
     methods: {
-        async getAuthenticatedUser () {
-        //   console.log('loggedIn : ' + this.$auth.loggedIn)
-        //   console.log(this.$auth.fetchUser())
-        //   try {
-        //     this.$axios.setToken('123', 'Bearer')
-        //     let response = await this.$axios.$get('/api/v1/user')
-        //   } catch (err) {
-        //     console.log(err)
-        //   }
-        },
         async userLogout() {
             try {
                 
                 let response = await this.$auth.logout('laravelSanctum')
                 this.currentUser = ''
                 this.isLogged = false
-                // this.$router.push('/login')
             } catch (err) {
                 console.log(err)
             }
-        },
-
-        switchForm() {
-            this.form = this.form == 'login' ? 'register' : 'login'
         },
         handleScroll(){
             if(window.pageYOffset> 100){

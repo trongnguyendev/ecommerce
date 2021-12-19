@@ -16,6 +16,7 @@ module.exports = {
         's-14'  : '0.875rem',
         's-16'  : '1rem',
         's-18'  : '1.125rem',
+        's-24'  : '1.5rem',
         's-30'  : '1.875rem'
       },
       colors: {

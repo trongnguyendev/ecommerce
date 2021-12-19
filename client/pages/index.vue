@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="grid gap-6 py-4">
 
     <BannerSlide />
 
@@ -13,7 +13,7 @@
 
     <!-- <ProductToday /> -->
 
-    <!-- <ProductByCategory /> -->
+    <ProductByCategory />
 
     <!-- <ProductByCategory />
 
@@ -34,7 +34,7 @@ export default {
   },
 
   created() {
-    console.log(this.$auth.loggedIn);
+    // console.log(this.$auth.loggedIn);
   },
 
   data(){

@@ -1,5 +1,5 @@
 <template>
-    <NuxtLink to="/" class="relative product shadow-sm rounded-sm hover:shadow-xl block">
+    <NuxtLink to="/" class="relative product rounded-sm hover:shadow-xl block">
         <img :src="require('/assets/images/' + picture)" alt="" class="w-full">
         <div class="p-2 bg-bg gap-3">
             <h1 class="text-s-12 text-color-t line-clamp h-9">{{ title }}</h1>
