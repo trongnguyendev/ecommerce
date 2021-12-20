@@ -1,147 +1,53 @@
 <template>
     <div class="container bg-container">
-        <nav aria-label="breadcrumb">
-            <ul class="breadcrumb py-2 rounded">
-            <li class="breadcrumb-item"><NuxtLink to="/"><span class="text-s-14 text-color-t">Trang chủ</span></NuxtLink></li>
-            <li class="breadcrumb-item text-s-14" aria-current="page">Máy Ảnh - Máy Quay Phim</li>
-            </ul>
-        </nav>
+        <Breadcrumb />
 
         <div class="grid grid-cols-5 bg-bg rounded-md">
-            <div class="side col-span-1">
-                <!-- category vertical -->
-                <div class="w-full gap-3 p-4 grid">
-                    <h2 class="text-color-t font-bold text-s-14">DANH MỤC SẢN PHẨM</h2>
-                    <ul class="list list-flush gap-2">
-                        <li class="">
-                            <NuxtLink to="/" class="block text-s-13 text-color-t">Ống Kính - Ống Ngắm</NuxtLink>
-                        </li>
-                        <li class="">
-                            <NuxtLink to="/" class="block text-s-13 text-color-t">Ống Kính (Lens)</NuxtLink>
-                        </li>
-                        <li class="">
-                            <NuxtLink to="/" class="block text-s-13 text-color-t">Máy Bay Camera và Phụ Kiện</NuxtLink>
-                        </li>
-                         <li class="">
-                            <NuxtLink to="/" class="block text-s-13 text-color-t">Máy Bay Camera</NuxtLink>
-                        </li>
-                         <li class="">
-                            <NuxtLink to="/" class="block text-s-13 text-color-t">Máy Bay Camera</NuxtLink>
-                        </li>
-                         <li class="">
-                            <NuxtLink to="/" class="block text-s-13 text-color-t">Máy Bay Camera</NuxtLink>
-                        </li>
-                         <li class="">
-                            <NuxtLink to="/" class="block text-s-13 text-color-t">Máy Bay Camera</NuxtLink>
-                        </li>
-                        <li class="">
-                            <NuxtLink to="/" class="block text-s-13 text-color-t">Thiết Bị Quay Phim</NuxtLink>
-                        </li>
-                    </ul>
-                </div>
-                <!-- end category vertical -->
-
-                <!-- brand vertical -->
-                <div class="w-full gap-3 p-4 grid">
-                    <h2 class="text-color-t font-bold text-s-14">THƯƠNG HIỆU</h2>
-                    <ul class="list list-flush gap-2">
-                        <li class="">
-                            <label class="flex items-center">
-                                <input type="checkbox" class="form-checkbox w-3 h-3 rounded-none border-gray-400">
-                                <span class="ml-2 cursor-pointer text-s-13 text-color-t">ADIDAS</span>
-                            </label>
-                        </li>
-                        <li class="">
-                            <label class="flex items-center">
-                                <input type="checkbox" class="form-checkbox w-3 h-3 rounded-none border-gray-400">
-                                <span class="ml-2 cursor-pointer text-s-13 text-color-t">ADIDAS</span>
-                            </label>
-                        </li>
-                        <li class="">
-                            <label class="flex items-center">
-                                <input type="checkbox" class="form-checkbox w-3 h-3 rounded-none border-gray-400">
-                                <span class="ml-2 cursor-pointer text-s-13 text-color-t">ADIDAS</span>
-                            </label>
-                        </li>
-                        <li class="">
-                            <label class="flex items-center">
-                                <input type="checkbox" class="form-checkbox w-3 h-3 rounded-none border-gray-400">
-                                <span class="ml-2 cursor-pointer text-s-13 text-color-t">ADIDAS</span>
-                            </label>
-                        </li>
-                        <li class="">
-                            <label class="flex items-center">
-                                <input type="checkbox" class="form-checkbox w-3 h-3 rounded-none border-gray-400">
-                                <span class="ml-2 cursor-pointer text-s-13 text-color-t">ADIDAS</span>
-                            </label>
-                        </li>
-                    </ul>
-                </div>
-                <!-- end brand vertical -->
-
-                <!-- rate filter -->
-                <div class="w-full gap-3 p-4 grid">
-                    <h2 class="text-color-t font-bold text-s-14">ĐÁNH GIÁ</h2>
-                    <div class="grid gap-2">
-                        <div class="flex items-center rate-5 cursor-pointer">
-                            <StarIcon v-for="item in 5" :key="item" class="w-5 h-5 text-cl-star" />
-                            <span class="ml-2 text-color-t text-s-13">từ 5 sao</span>
-                        </div>
-                        <div class="flex items-center rate-4 cursor-pointer">
-                            <StarIcon v-for="item in 4" :key="item" class="w-5 h-5 text-cl-star" />
-                            <StarIcon v-for="item in 1" :key="item" class="w-5 h-5 text-gray-300" />
-                            <span class="ml-2 text-color-t text-s-13">từ 4 sao</span>
-                        </div>
-                        <div class="flex items-center rate-3 cursor-pointer">
-                            <StarIcon v-for="item in 3" :key="item" class="w-5 h-5 text-cl-star" />
-                            <StarIcon v-for="item in 2" :key="item" class="w-5 h-5 text-gray-300" />
-                            <span class="ml-2 text-color-t text-s-13">từ 3 sao</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- end rate filter -->
-
-                <!-- price filter -->
-                <div class="w-full gap-3 p-4 grid">
-                    <h2 class="text-color-t font-bold text-s-14">GIÁ</h2>
-                    <div class="">
-                        <span class="badge bg-gray-100 text-gray-900 text-s-13 font-normal">Dưới 200.000</span>
-                        <span class="badge bg-gray-100 text-gray-900 text-s-13 font-normal">Từ 200.000 đến 400.000</span>
-                        <span class="badge bg-gray-100 text-gray-900 text-s-13 font-normal">Từ 400.000 đến 800.000</span>
-                        <span class="badge bg-gray-100 text-gray-900 text-s-13 font-normal">Trên 800.000</span>
-                    </div>
-                    <div class="grid gap-2">
-                        <p class="text-s-13 text-color-t opacity-50">Chọn khoảng giá</p>
-                        <div class="flex gap-3 items-center">
-                            <input class="form-input form-input-sm" id="name" type="number" value="0">
-                            -
-                            <input class="form-input form-input-sm" id="name" type="number" value="0">
-                        </div>
-                        <button class="px-2 py-1 text-color-1st hover:text-white border-[1px] w-28 border-color-1st bg-bg hover:bg-color-1st block text-s-13 text-center rounded-sm">
-                            Áp dụng
-                        </button>
-                    </div>
-                </div>
-                <!-- end price filter -->
-
-            </div>
+            <SidebarFilterProduct class="col-span-1 hidden lg:block" />
+            
             <div class="col-span-4 p-4">
                 <div class="top-banner-product grid gap-3">
                     <h1 class="text-color-t text-s-24 font-thin mb-2">Máy Ảnh - Máy Quay Phim</h1>
-                    <img alt="" src="~/images/banner_small4.png" class="w-full rounded-md">
+                    <!-- <img alt="" src="~/images/banner_small4.png" class="w-full rounded-md"> -->
 
                     <div class="filter-product flex gap-3 bg-bg-container rounded-sm items-center p-3">
                         <h2 class="text-s-13 text-color-t opacity-70">Sắp xếp theo</h2>
                         <div class="flex cursor-pointer gap-3 ">
                             <div class="inline-block bg-color-1st text-white text-s-13 p-2 px-3 rounded-sm">Phổ Biến</div>
                             <div class="inline-block text-color-t text-s-13 p-2 px-3 rounded-sm bg-bg">Mới nhất</div>
-                            <div class="inline-block text-color-t text-s-13 p-2 px-3 rounded-sm bg-bg">Bán Chạy</div>
-                            <div class="inline-block text-color-t text-s-13 p-2 px-3 rounded-sm bg-bg">Giá Thấp</div>
-                            <div class="inline-block text-color-t text-s-13 p-2 px-3 rounded-sm bg-bg">Giá Cao</div>
+                            <div class="hidden lg:inline-block text-color-t text-s-13 p-2 px-3 rounded-sm bg-bg">Bán Chạy</div>
+                            <div class="hidden lg:inline-block text-color-t text-s-13 p-2 px-3 rounded-sm bg-bg">Giá Thấp</div>
+                            <div class="hidden lg:inline-block text-color-t text-s-13 p-2 px-3 rounded-sm bg-bg">Giá Cao</div>
+                        </div>
+
+                        <div class="flex items-center ml-auto">
+                            <div class="text-s-13 text-color-t mr-2">1/10</div>
+                            <div class="bg-bg border-gray-200 border-[1px] p-1 cursor-pointer opacity-70"><ChevronLeftIcon class="font-thin text-color-t" /></div>
+                            <div class="bg-bg border-gray-200 border-[1px] p-1 cursor-pointer"><ChevronRightIcon class="font-thin text-color-t" /></div>
                         </div>
                     </div>
 
-                    <div class="filter-selected">
+                    <div class="filter-selected flex items-center">
+                        <!-- filter mobile -->
+                        <div x-data="drawer()">
+                            <button class="btn text-color-1st" x-spread="trigger"><BeakerIcon class="w-5 h-5" /></button>
+                            <div class="dialog dialog-sm" x-spread="drawer" x-cloak>
+                                <div class="drawer-content">
+                                    <div class="dialog-header bg-color-1st px-4">
+                                        <span class="m-auto font-bold text-white text-s-18">Lọc sản phẩm</span>
+                                        <button type="button" class="btn btn-light btn-sm btn-icon bg-transparent" aria-label="Close" x-on:click="close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+                                    </div>
+                                    <div class="dialog-body px-0">
+                                        <SidebarFilterProduct />
+                                    </div>
+                                    <div class="dialog-footer">
+                                        <button type="button" class="btn btn-light" @click="close">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end filter mobile -->
                         <span class="badge bg-bg-container border-[1px] border-color-1st font-thin text-color-t">
                             Từ 200.000 đến 400.000
                             <button class="btn btn-xs btn-icon text-current hover:bg-red-200 badge-close"><XIcon /></button>
@@ -166,6 +72,17 @@
                             />
                         </div>
                     </div>
+
+                    <!-- pagination -->
+                    <nav class="pagination justify-end" role="navigation" aria-label="pagination">
+                        <a href="#" class="pagination-link" aria-label="Goto previous page"><svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></a>
+                        <a href="#" class="pagination-link" aria-label="Goto page 1">1</a>
+                        <a href="#" class="pagination-link" aria-label="Goto page 2">2</a>
+                        <a href="#" class="pagination-link pagination-active" aria-label="Page 5" aria-current="page">5</a>
+                        <a href="#" class="pagination-link" aria-label="Goto page 6">6</a>
+                        <a href="#" class="pagination-link" aria-label="Goto next page"><svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></i></a>
+                    </nav>
+                    <!-- end pagination -->
                 </div>
 
             </div>
@@ -175,11 +92,16 @@
 </template>
 
 <script>
-import { StarIcon, XIcon } from "@vue-hero-icons/solid"
+import { StarIcon, XIcon, ChevronRightIcon, ChevronLeftIcon } from "@vue-hero-icons/solid"
+import { BeakerIcon } from "@vue-hero-icons/outline"
+
 export default {
     components: {
         StarIcon,
-        XIcon
+        XIcon,
+        ChevronRightIcon,
+        ChevronLeftIcon,
+        BeakerIcon
     },
 
     data() {

@@ -96,7 +96,7 @@
 
         <div class="container">
             <!-- navigation -->
-            <nav class="">
+            <!-- <nav class="">
                 <ul class="flex space-x-7 items-center">
                     <li
                     v-for="item in menu" :key="item.name"
@@ -118,7 +118,7 @@
                         </ul>
                     </li>
                 </ul>
-            </nav>
+            </nav> -->
         </div>
 
     </header>
