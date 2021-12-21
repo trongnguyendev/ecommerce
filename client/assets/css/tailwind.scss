@@ -209,6 +209,9 @@ header {
 
 @layer components {
     .container {
-        @apply lg:px-8 xl:px-20
+        @apply px-0 lg:px-8 xl:px-20
+    }
+    .dialog-footer {
+        @apply bg-bg
     }
 }

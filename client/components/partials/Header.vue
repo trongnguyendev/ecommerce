@@ -1,6 +1,6 @@
 <template>
     <header
-    class="bg-color-1st duration-75 transition"
+    class="bg-color-1st duration-75 transition p-2 lg:p-0"
     :class="{ 'scrolled': !view.atTopOfPage, 'relative': view.atTopOfPage }" 
     >
         <div class="container">

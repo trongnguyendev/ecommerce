@@ -1,5 +1,5 @@
 <template>
-    <div class="side">
+    <div class="side bg-bg-container">
         <!-- category vertical -->
         <div class="w-full gap-3 p-4 grid">
             <h2 class="text-color-t font-bold text-s-14">DANH MỤC SẢN PHẨM</h2>
