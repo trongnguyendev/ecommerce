@@ -42,7 +42,7 @@
                             <p>Chưa có sản phẩm nào.</p>
                         </div>
                     </div>
-                    <div x-data="dropdown()" class="ml-7">
+                    <!-- <div x-data="dropdown()" class="ml-7">
                         <div class="relative cursor-pointer" id="bottom" x-spread="trigger">
                             <IconsNotification  class="w-8 h-8" />
                             <span class="absolute top-[-2px] right-[-10px] bg-black text-white block w-5 h-5 text-s-11 pt-[2px] rounded-full text-center">0</span>
@@ -51,7 +51,7 @@
                             <a href="#" class="dropdown-item">Red</a>
                             <a href="#" class="dropdown-item">Green</a>
                         </div>
-                    </div>
+                    </div> -->
                     
                     <NuxtLink to="/login" class="flex ml-7 cursor-pointer items-center" v-if="!$auth.loggedIn">
                         <div class="avatar bg-color-1st text-black border-black border-2 avatar-sm"><UserIcon class="w-8 h-8 stroke-0 font-thin" /></div>

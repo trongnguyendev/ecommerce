@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 :root {
-    --color-1st: #fcb800;
+    --color-1st: rgb(26, 148, 255);
+    // --color-1st: #fcb800;
     --color-2nd: #222222;
 
     --color-text: black;
@@ -15,7 +16,7 @@
 
     --yellow: rgb(253, 216, 54);
     --red: rgb(255, 66, 78);
-    --red_2: #ff424f59;
+    --red_2: #ff424f1f;
 
     --breakpoint-xs: 0;
     --breakpoint-sm: 576px;
@@ -139,7 +140,11 @@ header {
 .VueCarousel-navigation-next {
     right: 28px !important;
 }
-
+.picture-product {
+    .VueCarousel-navigation-button {
+        top: 58% !important;
+    }
+}
 .rotatey-180 {
     transform: rotateY(180deg);
 }

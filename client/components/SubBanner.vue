@@ -1,6 +1,6 @@
 <template>
     <div class="sub_banner container">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
+        <div class="grid grid-cols-2">
             <NuxtLink to="/" class="relative">
                 <div class="absolute left-4 top-4">
                     <h3 class="text-white text-s-18">Pack more in. Get more out.</h3>

@@ -17,6 +17,7 @@
     "kutty": "^0.5.2",
     "nuxt": "^2.15.7",
     "vue-carousel": "^0.18.0",
+    "vue-cool-lightbox": "^2.7.4",
     "vue-multiselect": "^2.1.6"
   },
   "devDependencies": {

@@ -3,7 +3,7 @@
         <div class="bg-bg mb-[2px] py-3 rounded-md mb-2 shadow-sm">
             <HeadingTitle name="SẢN PHẨM NỔI BẬT" class="" />
         </div>
-        <div class="grid grid-cols-auto-fit-170 lg:grid-cols-auto-fit-320 gap-4">
+        <div class="grid grid-cols-auto-fit-170 lg:grid-cols-auto-fit-320 gap-4 p-2 md:p-0">
             <div v-for="product in products" :key="product.title">
                 <ProductItem
                 :title="product.title"

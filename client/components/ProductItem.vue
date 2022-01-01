@@ -5,16 +5,7 @@
             <h1 class="text-s-12 text-color-t line-clamp h-9">{{ title }}</h1>
             <div class="">
                 <div class="flex justify-between">
-                    <div class="flex ">
-                        <StarIcon v-for="item in starCurrent" :key="item" class="w-4 h-4 text-cl-star" />
-                        <div class="flex" v-if="starHalf">
-                            <IconsStarHalf class="w-[13px] h-4 text-cl-star" />
-                            <IconsStarHalfNot class="w-[14px] h-4 ml-[-13px] text-gray-300 rotatey-180" />
-                        </div>
-                        <div v-if="starRemain != 0" class="flex">
-                            <StarIcon v-for="item in starRemain" :key="item" class="w-4 h-4 text-gray-300" />
-                        </div>
-                    </div>
+                    <RateStar :stars="star" />
                     <span class="text-s-10 text-color-t opacity-50">Đã bán {{ bought }}</span>
                 </div>
                 <div class="text-s-16 text-cl-red font-semibold flex items-center">
@@ -34,39 +25,7 @@
 </template>
 
 <script>
-import { StarIcon } from "@vue-hero-icons/solid"
 export default {
     props: [ 'title', 'price', 'discount', 'percent', 'star', 'bought', 'picture' ],
-
-    components: {
-        StarIcon
-    },
-
-    data() {
-        return {
-            starCurrent: 0,
-            starRemain: 0,
-            starHalf: false
-        }
-    },
-    
-    mounted() {       
-        this.starRemain = Math.floor(5 - this.star)
-        this.starCurrent = this.star
-        this.changeStar(this.star)
-    },
-
-    methods: {
-        isTypeInt(n) {
-            return n % 1 == 0
-        },
-
-        changeStar(star) {
-            if( !this.isTypeInt(this.star)) {
-                this.starHalf = true
-                this.starCurrent = Math.floor(this.star)
-            }
-        }
-    }
 }
 </script>

@@ -11,7 +11,7 @@
 
     <SubBanner />
 
-    <!-- <ProductToday /> -->
+    <ProductToday />
 
     <ProductByCategory />
 
